@@ -53,7 +53,7 @@ nav.top ul a:hover{color:var(--accent)}
 /* HERO: program monitor */
 .hero{min-height:100svh;display:grid;place-items:center;padding:90px var(--gutter) 40px;position:relative}
 .monitor{position:relative;width:100%;max-width:1240px;aspect-ratio:16/9;max-height:78svh;border:1px solid var(--line);background:radial-gradient(ellipse at 70% 40%,#1d1d25 0%,var(--bg) 70%);overflow:hidden}
-@media(max-width:720px){.monitor{aspect-ratio:auto;min-height:72svh}}
+@media(max-width:720px){.monitor{aspect-ratio:auto;max-height:none}}
 .monitor .corner{position:absolute;width:26px;height:26px;border:2px solid var(--fg);opacity:.75}
 .c1{top:16px;left:16px;border-right:0!important;border-bottom:0!important}
 .c2{top:16px;right:16px;border-left:0!important;border-bottom:0!important}
@@ -86,7 +86,7 @@ nav.top ul a:hover{color:var(--accent)}
 .btn.primary:hover{box-shadow:3px 3px 0 var(--fg)}
 
 .portrait{position:relative;justify-self:end;width:min(100%,380px)}
-@media(max-width:720px){.portrait{justify-self:start;width:min(100%,280px)}}
+@media(max-width:720px){.portrait{order:-1;justify-self:start;width:min(72%,240px);margin-top:8px}.portrait .sticker{width:76px;height:76px;right:-24px;top:-18px}}
 .portrait .frame{position:relative;aspect-ratio:410/428;overflow:hidden;background:#2b3043;clip-path:inset(0 0 0 0);animation:reveal 1.2s .3s cubic-bezier(.7,0,.2,1) both}
 @keyframes reveal{from{clip-path:inset(0 0 100% 0)}}
 .portrait img{width:100%;height:100%;object-fit:cover;filter:contrast(1.05) saturate(.9)}

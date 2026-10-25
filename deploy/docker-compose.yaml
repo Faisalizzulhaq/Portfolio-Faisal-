@@ -26,7 +26,7 @@ services:
     restart: "no"
     environment:
       # Bump on every site change so the redeploy recreates this container and re-copies the page.
-      SITE_REV: "2"
+      SITE_REV: "3"
     volumes:
       - site:/site
     command:
