@@ -1,0 +1,40 @@
+# Hostinger VPS (Docker + Traefik template). The existing Traefik project handles HTTPS.
+# "media" pulls the site from the public Portfolio-Faisal- repo, then downloads and
+# encodes every video from Google Drive. Re-run the project to publish a new version.
+services:
+  web:
+    image: nginx:1.27-alpine
+    restart: unless-stopped
+    volumes:
+      - site:/usr/share/nginx/html:ro
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.portfolio.loadbalancer.server.port=80
+      - traefik.http.routers.portfolio.rule=Host(`portfolio.31-97-187-160.sslip.io`)
+      - traefik.http.routers.portfolio.entrypoints=websecure
+      - traefik.http.routers.portfolio.tls.certresolver=letsencrypt
+      - traefik.http.routers.portfolio-path.rule=Host(`srv1997963.hstgr.cloud`) && PathPrefix(`/portfolio`)
+      - traefik.http.routers.portfolio-path.entrypoints=websecure
+      - traefik.http.routers.portfolio-path.tls.certresolver=letsencrypt
+      - traefik.http.routers.portfolio-path.middlewares=portfolio-slash,portfolio-strip
+      - traefik.http.middlewares.portfolio-slash.redirectregex.regex=^(https?://[^/]+/portfolio)$$
+      - traefik.http.middlewares.portfolio-slash.redirectregex.replacement=$${1}/
+      - traefik.http.middlewares.portfolio-strip.stripprefix.prefixes=/portfolio
+
+  media:
+    image: python:3.12-slim
+    restart: "no"
+    volumes:
+      - site:/site
+    command:
+      - sh
+      - -c
+      - >-
+        apt-get update -qq && apt-get install -y -qq ffmpeg curl > /dev/null &&
+        mkdir -p /tmp/p && curl -fsSL https://github.com/Faisalizzulhaq/portfolio-faisal-/archive/refs/heads/main.tar.gz
+        | tar xzf - -C /tmp/p --strip-components=1 &&
+        cp /tmp/p/index.html /site/ && cp -r /tmp/p/assets /site/ &&
+        pip install -q gdown && sh /tmp/p/deploy/build-media.sh
+
+volumes:
+  site:
