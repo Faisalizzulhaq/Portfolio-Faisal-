@@ -10,7 +10,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.services.portfolio.loadbalancer.server.port=80
-      - traefik.http.routers.portfolio.rule=Host(`portfolio.31-97-187-160.sslip.io`)
+      - traefik.http.routers.portfolio.rule=Host(`faisalportofolio.site`) || Host(`www.faisalportofolio.site`) || Host(`portfolio.31-97-187-160.sslip.io`)
       - traefik.http.routers.portfolio.entrypoints=websecure
       - traefik.http.routers.portfolio.tls.certresolver=letsencrypt
       - traefik.http.routers.portfolio-path.rule=Host(`srv1997963.hstgr.cloud`) && PathPrefix(`/portfolio`)

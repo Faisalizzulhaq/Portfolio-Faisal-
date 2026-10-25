@@ -6,7 +6,7 @@ Single-page portfolio landing page (`index.html`, no build step).
 - Edit projects, experience and skills in the `PROJECTS`, `EXP` and `SKILLS` arrays at the bottom of `index.html`.
 
 ## Publish
-Live copy: the public repo `Faisalizzulhaq/Portfolio-Faisal-` (same `index.html`, `assets/`, `deploy/`).
+Live at https://faisalportofolio.site. Deploy copy: the public repo `Faisalizzulhaq/Portfolio-Faisal-` (same `index.html`, `assets/`, `deploy/`).
 It runs on the Hostinger VPS as the Docker project `portfolio` from `deploy/docker-compose.yaml`:
 nginx serves the page behind the existing Traefik, and a one-off `media` container downloads each
 Drive video and encodes it to 1080p (`deploy/build-media.sh`). Redeploy the project to pick up changes.
