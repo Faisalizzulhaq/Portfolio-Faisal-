@@ -13,11 +13,11 @@ total=$(echo "$IDS" | wc -l)
 write_manifest() {
   {
     printf '{'; sep=''
-    for id in $IDS; do
-      if [ -s "$SITE/v/$id.mp4" ] && [ -s "$SITE/p/$id.jpg" ]; then v="v/$id.mp4"; p="p/$id.jpg"
-      elif [ -s "$SITE/videos/$id.mp4" ] && [ -s "$SITE/thumbs/$id.jpg" ]; then v="videos/$id.mp4"; p="thumbs/$id.jpg"
+    for mid in $IDS; do
+      if [ -s "$SITE/v/$mid.mp4" ] && [ -s "$SITE/p/$mid.jpg" ]; then v="v/$mid.mp4"; p="p/$mid.jpg"
+      elif [ -s "$SITE/videos/$mid.mp4" ] && [ -s "$SITE/thumbs/$mid.jpg" ]; then v="videos/$mid.mp4"; p="thumbs/$mid.jpg"
       else continue; fi
-      printf '%s"%s":{"v":"%s","p":"%s"}' "$sep" "$id" "$v" "$p"; sep=','
+      printf '%s"%s":{"v":"%s","p":"%s"}' "$sep" "$mid" "$v" "$p"; sep=','
     done
     printf '}\n'
   } > "$SITE/media.json.tmp" && mv "$SITE/media.json.tmp" "$SITE/media.json"
