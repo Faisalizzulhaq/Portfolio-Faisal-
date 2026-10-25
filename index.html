@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Faisal Izzulhaq — Video Editor & Videographer</title>
+<title>Faisal Izzulhaq | Video Editor & Videographer</title>
 <meta name="description" content="Portfolio of Faisal Izzulhaq, Video Editor & Videographer based in South Tangerang. Brand commercials, company profiles, YouTube content and travel documentaries.">
-<meta property="og:title" content="Faisal Izzulhaq — Video Editor & Videographer">
+<meta property="og:title" content="Faisal Izzulhaq | Video Editor & Videographer">
 <meta property="og:description" content="Brand commercials, company profiles, YouTube content & travel documentaries. 20+ brands, 55+ videos delivered.">
 <meta property="og:image" content="assets/faisal.jpg">
 <meta name="theme-color" content="#0b0b0d">
@@ -50,7 +50,7 @@ nav.top ul a{color:var(--muted);transition:color .2s}
 nav.top ul a:hover{color:var(--accent)}
 @media(max-width:720px){nav.top ul{display:none}}
 
-/* HERO — program monitor */
+/* HERO: program monitor */
 .hero{min-height:100svh;display:grid;place-items:center;padding:90px var(--gutter) 40px;position:relative}
 .monitor{position:relative;width:100%;max-width:1240px;aspect-ratio:16/9;max-height:78svh;border:1px solid var(--line);background:radial-gradient(ellipse at 70% 40%,#1d1d25 0%,var(--bg) 70%);overflow:hidden}
 @media(max-width:720px){.monitor{aspect-ratio:auto;min-height:72svh}}
@@ -249,22 +249,36 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 @media(max-width:600px){.scrub .label{display:none}.scrub .seg{font-size:0;padding:0}.scrub .tc{min-width:0;font-size:12px}}
 
 /* modal */
-.modal{position:fixed;inset:0;z-index:100;background:rgba(5,5,7,.94);display:none;align-items:center;justify-content:center;padding:clamp(12px,4vw,48px)}
+.modal{position:fixed;inset:0;z-index:100;background:var(--bg);display:none;align-items:center;justify-content:center;padding:clamp(12px,4vw,48px);opacity:0;transition:opacity .35s}
 .modal.open{display:flex}
-.modal .box{width:100%;max-width:1100px;max-height:100%;display:flex;flex-direction:column;gap:14px}
+.modal.show{opacity:1}
+.modal .box{width:100%;max-width:1180px;max-height:100%;display:flex;flex-direction:column;gap:16px;transform:translateY(18px);transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.modal.show .box{transform:none}
 .modal .head{display:flex;justify-content:space-between;align-items:start;gap:16px}
 .modal h3{font-family:var(--display);font-weight:400;font-size:clamp(28px,4vw,48px);text-transform:uppercase;line-height:1}
 .modal .sub{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.08em;margin-top:6px}
 .modal .x{width:44px;height:44px;border:1px solid var(--line);font-size:22px;flex:none}
 .modal .x:hover{background:var(--accent);color:#000}
-.player{position:relative;aspect-ratio:16/9;background:#000;border:1px solid var(--line);max-height:68vh;width:100%}
-.player iframe,.player video{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
+.stage{display:flex;justify-content:center}
+.player{position:relative;aspect-ratio:16/9;width:min(100%,calc(68vh * var(--ar,1.7778)));background:#000;overflow:hidden;transition:width .4s,aspect-ratio .4s}
+.player video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000;opacity:0;transition:opacity .45s}
+.player.ready video{opacity:1}
+.player .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:blur(18px) brightness(.45);transform:scale(1.1);transition:opacity .45s}
+.player.ready .poster{opacity:0}
+.player .spin{position:absolute;left:50%;top:50%;width:42px;height:42px;margin:-21px 0 0 -21px;border:2px solid rgba(255,255,255,.2);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;opacity:0;transition:opacity .2s;pointer-events:none}
+.player.loading .spin{opacity:1}
+.player .pending{position:absolute;inset:0;display:none;place-items:center;align-content:center;gap:14px;text-align:center;padding:20px}
+.player.wait .pending{display:grid}
+.player.wait .spin,.player.wait video{display:none}
+.player .pending p{font-family:var(--mono);font-size:13px;color:#c9c7cf;max-width:40ch}
+.eps-row{display:flex;gap:8px;align-items:center}
 [hidden]{display:none!important}
-.eps{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;scrollbar-width:thin}
+.eps{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;scrollbar-width:thin;flex:1}
 .ep{flex:none;font-family:var(--mono);font-size:12px;padding:9px 12px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.ep:hover{color:var(--fg);border-color:var(--fg)}
 .ep.on{background:var(--accent);border-color:var(--accent);color:#000}
-.modal .open-drive{font-family:var(--mono);font-size:12px;color:var(--muted);text-decoration:underline;text-underline-offset:3px}
-.modal .open-drive:hover{color:var(--accent)}
+.nav-ep{flex:none;width:40px;height:38px;border:1px solid var(--line);font-family:var(--mono)}
+.nav-ep:hover{background:var(--fg);color:#000}
 
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}.clip{transform:none}.hero h1 .line span{transform:none}}
 </style>
@@ -297,7 +311,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
         <div class="tag" style="margin-bottom:18px"><b>●</b> Scene 01 · Take 01</div>
         <h1><span class="line"><span>Faisal</span></span><span class="line"><span>Izzulhaq</span></span></h1>
         <div class="role"><mark>Video Editor</mark><span>&amp;</span><span>Videographer</span></div>
-        <p class="lead">I cut stories that sell, explain and move people — from 30-second brand spots and product catalogues to company profiles, YouTube episodes and travel documentaries.</p>
+        <p class="lead">I edit and shoot video for brands, companies and creators. My work covers 30-second ads, product catalogues, company profiles, YouTube episodes and travel documentaries.</p>
         <div class="cta">
           <a href="#work" class="btn primary">▶ Watch my work</a>
           <a href="#contact" class="btn">Hire me</a>
@@ -328,13 +342,13 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   <div class="wrap about-grid">
     <div class="reveal">
       <div class="tag" style="margin-bottom:22px"><b>01</b> / About me</div>
-      <p class="big">I'm a person who <b>likes challenges</b> and new things. To me, challenges are a maturing process that makes me better — and I'm used to working under pressure, because <b>pressure makes me more professional.</b></p>
-      <p class="small">Since 2020 I've been editing and shooting for production houses, clinics, influencers, foundations and a Japanese media company — plus dozens of local brands across fashion, food, beauty and lifestyle. I handle the whole pipeline: shooting, cutting, color, sound and motion, delivered in formats that fit each platform.</p>
+      <p class="big">I like <b>challenges</b> and new things. Every challenge helps me grow, and I work well under pressure because it keeps me <b>sharp and professional.</b></p>
+      <p class="small">Since 2020 I have edited and shot videos for production houses, a clinic, influencers, a foundation and a Japanese media company, plus more than 20 local brands in fashion, food, beauty and lifestyle. I handle the full process: shooting, editing, color, sound and motion, exported in the right format for each platform.</p>
       <div class="edu">
         <div class="ic">🎓</div>
         <div>
           <h4>Bachelor of Science of Hadith</h4>
-          <p>UIN Syarif Hidayatullah Jakarta · 2017 – 2021</p>
+          <p>UIN Syarif Hidayatullah Jakarta · 2017 to 2021</p>
         </div>
       </div>
     </div>
@@ -372,7 +386,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
         <div class="tag" style="margin-bottom:14px"><b>03</b> / Work experience</div>
         <h2>The <em>Timeline</em></h2>
       </div>
-      <p class="tag" style="max-width:34ch;text-transform:none;letter-spacing:.02em">My career, laid out like a sequence. Every clip is a role.</p>
+      <p class="tag" style="max-width:34ch;text-transform:none;letter-spacing:.02em">Each clip on this timeline is one role, placed by year.</p>
     </div>
     <div class="tl-wrap reveal" id="tl">
       <div class="tl-bar"><span>Sequence 01 · Career_Final_v6.prproj</span><span class="tc" id="tlTc">00:00:00:00</span></div>
@@ -403,11 +417,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
         </div>
       </div>
       <div class="services reveal">
-        <div class="svc"><span class="num">01</span><div><h4>Brand Commercials &amp; Ads</h4><p>Short, punchy spots for social &amp; digital ads — hooks in the first second, CTA at the end.</p></div></div>
-        <div class="svc"><span class="num">02</span><div><h4>Product Catalogue Videos</h4><p>Clean, rhythmic product showcases for fashion, kids wear, beauty and F&amp;B brands.</p></div></div>
-        <div class="svc"><span class="num">03</span><div><h4>Company Profiles</h4><p>Corporate &amp; campus profiles, training videos and reseller explainers that build trust.</p></div></div>
-        <div class="svc"><span class="num">04</span><div><h4>YouTube &amp; Creator Content</h4><p>Long-form episodes with pacing, b-roll, captions and retention-friendly edits.</p></div></div>
-        <div class="svc"><span class="num">05</span><div><h4>Travel &amp; Documentary</h4><p>Cinematic storytelling of places and people — from waterfalls to ancient volcanoes.</p></div></div>
+        <div class="svc"><span class="num">01</span><div><h4>Brand Commercials &amp; Ads</h4><p>Short ads for social media with a strong hook in the first second and a clear call to action.</p></div></div>
+        <div class="svc"><span class="num">02</span><div><h4>Product Catalogue Videos</h4><p>Clean product videos for fashion, kids wear, beauty and food brands.</p></div></div>
+        <div class="svc"><span class="num">03</span><div><h4>Company Profiles</h4><p>Company and campus profiles, training videos and reseller explainers.</p></div></div>
+        <div class="svc"><span class="num">04</span><div><h4>YouTube &amp; Creator Content</h4><p>Long-form episodes with tight pacing, b-roll and captions that keep viewers watching.</p></div></div>
+        <div class="svc"><span class="num">05</span><div><h4>Travel &amp; Documentary</h4><p>Cinematic stories about places and people, from waterfalls to ancient volcanoes.</p></div></div>
       </div>
     </div>
   </div>
@@ -427,7 +441,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   </div>
 </section>
 
-<footer><div class="wrap"><span>© <span id="yr"></span> Faisal Izzulhaq</span><span>Edited with ♥ · No frames were dropped</span></div></footer>
+<footer><div class="wrap"><span>© <span id="yr"></span> Faisal Izzulhaq</span><span>Video Editor &amp; Videographer · South Tangerang</span></div></footer>
 
 <!-- bottom scrub timeline -->
 <div class="scrub" aria-label="Page timeline">
@@ -443,9 +457,13 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
       <div><h3 id="mTitle"></h3><div class="sub" id="mSub"></div></div>
       <button class="x" id="mClose" aria-label="Close">✕</button>
     </div>
-    <div class="player"><video id="mVideo" controls playsinline preload="metadata"></video><iframe id="mFrame" title="Video player" allow="autoplay; fullscreen" allowfullscreen hidden></iframe></div>
-    <div class="eps" id="mEps"></div>
-    <a class="open-drive" id="mDrive" target="_blank" rel="noopener">Video not loading? Open it in Google Drive ↗</a>
+    <div class="stage"><div class="player" id="mPlayer">
+      <img class="poster" id="mPoster" alt="">
+      <video id="mVideo" controls playsinline preload="auto"></video>
+      <div class="spin"></div>
+      <div class="pending"><p>This cut is still being prepared on the server. It will play here in a few minutes.</p><a class="btn" id="mDrive" target="_blank" rel="noopener">Watch it on Google Drive ↗</a></div>
+    </div></div>
+    <div class="eps-row" id="mEpsRow"><button class="nav-ep" id="mPrev" aria-label="Previous video">‹</button><div class="eps" id="mEps"></div><button class="nav-ep" id="mNext" aria-label="Next video">›</button></div>
   </div>
 </div>
 
@@ -455,7 +473,7 @@ const CATS = {ads:'Commercial & Ads', catalogue:'Product Catalogue', profile:'Co
 
 const PROJECTS = [
   {client:'Okamiplus', desc:'Brand commercial', cat:'ads', year:2025, wide:true, videos:[['Okamiplus','18bBrQikNNwuAO10lNyqDsjTWen9YAWXb']]},
-  {client:'Beverly Hills Polo Club', desc:'Watch collection — social ad series', cat:'ads', year:2023, videos:[['Jam 1','17e4vCEb3TIZhyXDyQJTQGBQGEKGA9QW4'],['Jam 2','13JuPMNAbSTdnGgjZFyMGQgLBIs5IyN1F'],['Jam 3','1C-rY1JdNQU9DKcsaA9fmbjhrsXvtz-i4'],['Jam 4','13OIiYpjNX9sjx81G2ySPhP-N1bE3o6je'],['Jam 5','1L9sbCybZ-9vdzdY6r72J7BmiOgB5Igba'],['Jam 6','11G04Ybr_ADT37DWkmFNVO48arP_md6pJ'],['Jam 7','1LWWBppM7hktYKJhMn7mGT0_d8hR_opHB'],['Jam 10','1GMQgZv3sXAAI0BdI72_THr52xyQxh288']]},
+  {client:'Beverly Hills Polo Club', desc:'Watch collection social ads', cat:'ads', year:2023, videos:[['Jam 1','17e4vCEb3TIZhyXDyQJTQGBQGEKGA9QW4'],['Jam 2','13JuPMNAbSTdnGgjZFyMGQgLBIs5IyN1F'],['Jam 3','1C-rY1JdNQU9DKcsaA9fmbjhrsXvtz-i4'],['Jam 4','13OIiYpjNX9sjx81G2ySPhP-N1bE3o6je'],['Jam 5','1L9sbCybZ-9vdzdY6r72J7BmiOgB5Igba'],['Jam 6','11G04Ybr_ADT37DWkmFNVO48arP_md6pJ'],['Jam 7','1LWWBppM7hktYKJhMn7mGT0_d8hR_opHB'],['Jam 10','1GMQgZv3sXAAI0BdI72_THr52xyQxh288']]},
   {client:'Sahabat Ganjar · Jelajah Nusantara', desc:'Travel documentary series', cat:'travel', year:2024, videos:[['Cahaya Emas di Langit Embung Nglanggeran','1KXIJD_ecgsVjWJJ75Ye6PWVS0mzsxmU6'],['Simfoni Alam Gunung Api Purba','1J3uejMK4bidqRLML-OzksB82pToXFxpC'],['Eksplorasi Keajaiban Kalisuci','1w7Y6I6rXWyaqeLKDJlTmK8udXEHWG511'],['Keajaiban Sungai Oyo yang Tersembunyi','15eCM2I6XSDJp21Cwp8UYfiaJ4HXYYOsQ'],['Air Terjun Sri Gethuk','16p-s4RNE1bEgmv9lGkJgZV5rX4T744cL'],['Simfoni Alam di Pantai Sadranan','1JXOufvQJG1-JoDlgdw3BdDCVd6Q01_4f']]},
   {client:'Forland', desc:'Teaser & ads', cat:'ads', year:2023, videos:[['Teaser','1QHOJU32Af3gy4dl5lIe57YkHMNBwj4QR'],['Ads','1i3r6E_hRHdjLCGD4sHM6DlBYfg8hhslI']]},
   {client:'Maxfood', desc:'Company profile, product, reseller & training', cat:'profile', year:2023, wide:true, videos:[['Company Profile','1KkPed2OV0e74wZAdqcaYsmjmXVDALOjn'],['Production Process','1gqMMjHh4f_8Pf1bamOHahesTbvf8A3MR'],['Product Video','16CD9-5rO2RlIwOZCa0nkiT1K3JTo2Fi7'],['Reseller','1O2yncKPejg-qRJsWkTheZrJW8hpzzQ5w'],['Training Prakerja','1HBGCMqQsYHSzfEttRSAtRtI4yoZ8M6RP']]},
@@ -473,7 +491,7 @@ const PROJECTS = [
   {client:'AP', desc:'Brand ad', cat:'ads', year:2023, videos:[['AP','1jXGTzf6ycZPfSNKoH_XLIR-eyS5Ygb3O']]},
   {client:'Nasi Sambel Cak Boyo', desc:'F&B promo', cat:'ads', year:2022, videos:[['Sambel Cak Boyo','1L1ZVSHPEY0dkVBvvV-xt8e2wohms5oX1']]},
   {client:'URAR', desc:'Branding video', cat:'profile', year:2023, videos:[['URAR','1niAOZE8Z0fmc6_frJef5QFXKLTH5nxqv']]},
-  {client:'YouTube Creators', desc:'Sherly Annavita, StartupWise & more', cat:'youtube', year:2022, wide:true, videos:[['Sherly Annavita','11112B9V-Oo71LqHX495xJXSWQ8dX3jBP'],['StartupWise','1FgipopYJg1cwtJqofYQvq4oc3DKANwxN'],['Cara Agar Dihargai & Dihormati','1HL0PtsI5wmp5XxA6pjpDGnXcVLhckmyF'],['19.6 Tips Hidup Tidak Terasa Sulit','1tiJLVD2Aj-yEuk7c_5Ck9tOakdTlq9cI'],['What to Expect — Meet & Greet','1pM4ld3G94r-0-FxEwShuQsFXUhGTeU8s'],['Gengis','1a4N7KFXOOh6r6e3ibxP65sTy7b1eG90V'],['Tukeran Mobil','1_xFJCxeZZvmByyNk10FooMc3_lkgNZx3']]},
+  {client:'YouTube Creators', desc:'Sherly Annavita, StartupWise & more', cat:'youtube', year:2022, wide:true, videos:[['Sherly Annavita','11112B9V-Oo71LqHX495xJXSWQ8dX3jBP'],['StartupWise','1FgipopYJg1cwtJqofYQvq4oc3DKANwxN'],['Cara Agar Dihargai & Dihormati','1HL0PtsI5wmp5XxA6pjpDGnXcVLhckmyF'],['19.6 Tips Hidup Tidak Terasa Sulit','1tiJLVD2Aj-yEuk7c_5Ck9tOakdTlq9cI'],['What to Expect: Meet & Greet','1pM4ld3G94r-0-FxEwShuQsFXUhGTeU8s'],['Gengis','1a4N7KFXOOh6r6e3ibxP65sTy7b1eG90V'],['Tukeran Mobil','1_xFJCxeZZvmByyNk10FooMc3_lkgNZx3']]},
 ];
 
 const EXP = [
@@ -489,9 +507,10 @@ const SKILLS = [['Adobe Premiere Pro',21],['Videography',20],['Adobe Photoshop',
 
 /* ---------- helpers ---------- */
 const $ = s => document.querySelector(s);
-// Videos are self-hosted (720p H.264 in videos/, posters in thumbs/); Drive is the fallback while a file is missing.
-const thumb = id => `thumbs/${id}.jpg`;
+// Videos are self-hosted: media.json (written by deploy/build-media.sh) maps a Drive id to its MP4 and poster.
+let MEDIA = {};
 const driveThumb = id => `https://drive.google.com/thumbnail?id=${id}&sz=w1000`;
+const thumb = id => MEDIA[id] ? MEDIA[id].p : driveThumb(id);
 const pad = n => String(n).padStart(2,'0');
 const tc = secs => { const f=Math.floor((secs%1)*25); secs=Math.floor(secs); return `${pad(Math.floor(secs/3600))}:${pad(Math.floor(secs/60)%60)}:${pad(secs%60)}:${pad(f)}`; };
 $('#yr').textContent = new Date().getFullYear();
@@ -506,13 +525,16 @@ grid.innerHTML = PROJECTS.map((p,i)=>`
   <article class="card reveal ${p.wide?'wide':''}" data-cat="${p.cat}" data-i="${i}" tabindex="0" role="button" aria-label="Play ${p.client}">
     <div class="thumb">
       <div class="ph">${p.client}</div>
-      <img loading="lazy" src="${thumb(p.videos[0][1])}" alt="" data-fb="${driveThumb(p.videos[0][1])}" onerror="this.dataset.fb?(this.src=this.dataset.fb,this.removeAttribute('data-fb')):this.remove()">
+      <img loading="lazy" data-id="${p.videos[0][1]}" alt="" onerror="this.remove()">
       <span class="badge">${CATS[p.cat]}</span>
       ${p.videos.length>1?`<span class="count">▤ ${p.videos.length} videos</span>`:''}
       <div class="play"><i></i></div>
     </div>
     <div class="info"><div><h3>${p.client}</h3><p class="desc">${p.desc}</p></div><span class="yr">${p.year}</span></div>
   </article>`).join('');
+
+function loadThumbs(){ grid.querySelectorAll('img[data-id]').forEach(img=>{ img.src=thumb(img.dataset.id) }) }
+fetch('media.json',{cache:'no-store'}).then(r=>r.ok?r.json():{}).catch(()=>({})).then(m=>{ MEDIA=m||{}; loadThumbs() });
 
 const counts = PROJECTS.reduce((a,p)=>(a[p.cat]=(a[p.cat]||0)+1,a),{});
 $('#filters').innerHTML = `<button class="chip on" data-f="all">All<small>${PROJECTS.length}</small></button>` +
@@ -528,28 +550,51 @@ $('#filters').addEventListener('click',e=>{
   });
 });
 
-/* modal */
-const modal=$('#modal'), frame=$('#mFrame'), video=$('#mVideo');
+/* modal player */
+const modal=$('#modal'), video=$('#mVideo'), player=$('#mPlayer'), poster=$('#mPoster');
+let cur=null, curIdx=0;
+video.addEventListener('loadedmetadata',()=>{ if(video.videoWidth) player.style.setProperty('--ar',video.videoWidth/video.videoHeight), player.style.aspectRatio=`${video.videoWidth}/${video.videoHeight}` });
+video.addEventListener('loadeddata',()=>player.classList.add('ready'));
+video.addEventListener('waiting',()=>player.classList.add('loading'));
+['playing','canplay'].forEach(ev=>video.addEventListener(ev,()=>player.classList.remove('loading')));
+video.addEventListener('ended',()=>{ if(cur && curIdx<cur.videos.length-1) play(cur,curIdx+1) });
 function play(p,vi){
-  const [title,id]=p.videos[vi];
-  frame.hidden=true; frame.src='about:blank'; video.hidden=false;
-  video.poster=thumb(id); video.src=`videos/${id}.mp4`;
-  video.onerror=()=>{video.hidden=true; video.removeAttribute('src'); frame.hidden=false; frame.src=`https://drive.google.com/file/d/${id}/preview`};
-  video.play().catch(()=>{});
-  $('#mDrive').href=`https://drive.google.com/file/d/${id}/view`;
+  cur=p; curIdx=vi;
+  const [title,id]=p.videos[vi], m=MEDIA[id];
+  player.classList.remove('ready','wait'); player.classList.add('loading');
+  poster.src=thumb(id);
   $('#mSub').textContent=`${CATS[p.cat]} · ${p.year} · ${title}`;
   document.querySelectorAll('.ep').forEach((e,i)=>e.classList.toggle('on',i===vi));
+  document.querySelector('.ep.on')?.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'});
+  $('#mPrev').disabled=vi===0; $('#mNext').disabled=vi===p.videos.length-1;
+  if(!m){
+    video.pause(); video.removeAttribute('src'); video.load();
+    player.classList.remove('loading'); player.classList.add('wait');
+    $('#mDrive').href=`https://drive.google.com/file/d/${id}/view`;
+    return;
+  }
+  video.poster=m.p; video.src=m.v;
+  video.play().catch(()=>player.classList.remove('loading'));
 }
 function openProject(i){
   const p=PROJECTS[i];
   $('#mTitle').textContent=p.client;
-  $('#mEps').innerHTML = p.videos.length>1 ? p.videos.map((v,j)=>`<button class="ep" data-j="${j}">${pad(j+1)} · ${v[0]}</button>`).join('') : '';
-  $('#mEps').onclick=e=>{const b=e.target.closest('.ep'); if(b) play(p,+b.dataset.j)};
+  player.style.aspectRatio='16/9'; player.style.setProperty('--ar',16/9);
+  $('#mEpsRow').hidden=p.videos.length<2;
+  $('#mEps').innerHTML=p.videos.map((v,j)=>`<button class="ep" data-j="${j}">${pad(j+1)} · ${v[0]}</button>`).join('');
+  modal.classList.add('open'); requestAnimationFrame(()=>modal.classList.add('show'));
+  document.body.style.overflow='hidden';
   play(p,0);
-  modal.classList.add('open'); document.body.style.overflow='hidden';
   $('#mClose').focus();
 }
-function closeModal(){modal.classList.remove('open');frame.src='about:blank';video.pause();video.removeAttribute('src');video.load();document.body.style.overflow=''}
+$('#mEps').onclick=e=>{const b=e.target.closest('.ep'); if(b) play(cur,+b.dataset.j)};
+$('#mPrev').onclick=()=>curIdx>0&&play(cur,curIdx-1);
+$('#mNext').onclick=()=>curIdx<cur.videos.length-1&&play(cur,curIdx+1);
+function closeModal(){
+  modal.classList.remove('show'); video.pause();
+  setTimeout(()=>{modal.classList.remove('open');video.removeAttribute('src');video.load();player.classList.remove('ready','wait','loading')},350);
+  document.body.style.overflow='';
+}
 grid.addEventListener('click',e=>{const c=e.target.closest('.card'); if(c) openProject(+c.dataset.i)});
 grid.addEventListener('keydown',e=>{const c=e.target.closest('.card'); if(c&&(e.key==='Enter'||e.key===' ')){e.preventDefault();openProject(+c.dataset.i)}});
 $('#mClose').onclick=closeModal;
@@ -562,7 +607,7 @@ $('#years').innerHTML = Array.from({length:Y1-Y0},(_,i)=>`<span>${Y0+i}</span>`)
 const pct = y => ((y-Y0)/(Y1-Y0))*100;
 $('#tracks').innerHTML = EXP.map((x,i)=>{
   const end = x.to ?? NOW;
-  const label = `${Math.floor(x.from)} – ${x.to?Math.floor(x.to):'Present'}`;
+  const label = `${Math.floor(x.from)} to ${x.to?Math.floor(x.to):'Present'}`;
   return `<div class="trk">
     <div class="lbl"><span class="id ${x.kind==='a'?'a':'v'}">${x.kind==='a'?'A':'V'}${i+1}</span><div><h4>${x.org}</h4><p>${x.role} · ${label}</p></div></div>
     <div class="lane"><div class="clip ${x.kind} ${x.to?'':'live'}" style="left:${pct(x.from)}%;width:${pct(end)-pct(x.from)}%;transition-delay:${i*.12}s">${x.org.split(' · ')[0]}</div></div>
