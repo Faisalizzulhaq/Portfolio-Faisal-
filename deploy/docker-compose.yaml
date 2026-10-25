@@ -24,6 +24,9 @@ services:
   media:
     image: python:3.12-slim
     restart: "no"
+    environment:
+      # Bump on every site change so the redeploy recreates this container and re-copies the page.
+      SITE_REV: "2"
     volumes:
       - site:/site
     command:
