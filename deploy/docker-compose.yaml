@@ -33,11 +33,11 @@ services:
       - sh
       - -c
       - >-
-        apt-get update -qq && apt-get install -y -qq ffmpeg curl > /dev/null &&
-        mkdir -p /tmp/p && curl -fsSL https://github.com/Faisalizzulhaq/portfolio-faisal-/archive/refs/heads/main.tar.gz
-        | tar xzf - -C /tmp/p --strip-components=1 &&
-        cp /tmp/p/index.html /site/ && cp -r /tmp/p/assets /site/ &&
-        pip install -q gdown && sh /tmp/p/deploy/build-media.sh
+        mkdir -p /tmp/p && python -c "import io,tarfile,urllib.request;
+        tarfile.open(fileobj=io.BytesIO(urllib.request.urlopen('https://github.com/Faisalizzulhaq/Portfolio-Faisal-/archive/refs/heads/main.tar.gz').read())).extractall('/tmp/p')" &&
+        cd /tmp/p/* && cp index.html /site/ && cp -r assets /site/ && cp deploy/build-media.sh /tmp/build-media.sh &&
+        apt-get update -qq && apt-get install -y -qq ffmpeg > /dev/null &&
+        pip install -q gdown && sh /tmp/build-media.sh
 
 volumes:
   site:
