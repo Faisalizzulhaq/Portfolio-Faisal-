@@ -1,12 +1,7 @@
-/* Native, decorative swarm build. Page content stays in the real DOM. */
-.swarm-canvas{position:fixed;inset:0;width:100%;height:100%;z-index:65;pointer-events:none}
-.swarm-controls{position:fixed;right:var(--gutter);bottom:72px;z-index:70;display:flex;align-items:center;gap:4px;padding:5px;background:rgba(18,18,22,.94);border:1px solid var(--line);border-radius:6px;box-shadow:0 6px 24px #0005;font-family:var(--mono);font-size:10px;letter-spacing:.05em}
-.swarm-controls button{padding:8px 10px;border-radius:3px;white-space:nowrap}
-.swarm-controls button:hover{background:var(--line)}
-.swarm-controls button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.swarm-replay{color:var(--accent)}
-.swarm-toggle{color:var(--muted);border-left:1px solid var(--line)!important}
-body:has(.modal.open) .swarm-canvas,body:has(.modal.open) .swarm-controls{visibility:hidden}
-@media(max-width:600px){.swarm-controls{right:8px;bottom:8px;font-size:9px;box-shadow:none}.swarm-controls button{padding:7px 8px}}
-@media(max-width:600px) and (prefers-reduced-motion:no-preference){body:has(.swarm-controls) .scrub{padding-right:196px;grid-template-columns:1fr}body:has(.swarm-controls) .scrub .tc{display:none}}
-@media(prefers-reduced-motion:reduce){.swarm-canvas,.swarm-controls{display:none!important}}
+/* Entry point after exiting the full-page Swarm Rebuild overlay. */
+.swarm-launch{position:fixed;right:var(--gutter);bottom:72px;z-index:70;padding:10px 14px;border:1px solid var(--line);border-radius:6px;background:rgba(18,18,22,.94);color:var(--accent);font:11px var(--mono);box-shadow:0 6px 24px #0005}
+.swarm-launch[hidden]{display:none}
+.swarm-launch:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+body:has(.modal.open) .swarm-launch{display:none}
+@media(max-width:600px){.swarm-launch{bottom:10px;right:8px;padding:10px;font-size:10px}body:has(.swarm-launch:not([hidden])) .scrub{padding-right:158px;grid-template-columns:1fr}body:has(.swarm-launch:not([hidden])) .scrub .tc{display:none}}
+@media(prefers-reduced-motion:reduce){.swarm-launch{display:none}}

@@ -7,9 +7,11 @@ Single-page portfolio landing page (`index.html`, no build step).
 
 ## Swarm animation
 
-`assets/swarm.js` and `assets/swarm.css` add colored editor cursors that draw selection frames and reveal the real page elements as you scroll. Replay build repeats the visible section; Pause swarm remembers the visitor's choice. The effect respects reduced motion, suspends in background tabs, and keeps links and video controls clickable. No build step or external runtime dependency is needed.
+`assets/swarm.js` is a standalone implementation written for this portfolio. It captures the site's styled elements into an inert blueprint, covers the original page with an opaque stage, and assigns drawing, typing, image placement, alignment-guide and duplication jobs to animated cursors. Content becomes available to build as visitors scroll. Tour scrolls through the build automatically; 1×–3× controls pace; optional synthesized sound starts after interaction. Go live or Escape restores the interactive portfolio, with replay available afterward.
 
-The build-as-you-scroll concept is inspired by [Swarm Rebuild](https://github.com/DhvanilPatel/swarm-cursors) and [Joel Califa's Swarm](https://califa.github.io/swarm-site/). This is an independent website implementation; it does not bundle the extension's code.
+The effect respects reduced motion and background tabs. The original page remains the accessible source; its controls are inert while the decorative reconstruction is showing. Resize exits the snapshot to avoid displaying stale geometry. The capture is tailored to this page's static DOM and images, not arbitrary WebGL or embedded content.
+
+The visual concept is inspired by [Swarm Rebuild](https://github.com/DhvanilPatel/swarm-cursors) and [Joel Califa's Swarm](https://califa.github.io/swarm-site/). No source code, cursor graphics, sound engine or runtime from either repository is included.
 
 ## Publish
 Live at https://faisalportofolio.site. Deploy copy: the public repo `Faisalizzulhaq/Portfolio-Faisal-` (same `index.html`, `assets/`, `deploy/`).

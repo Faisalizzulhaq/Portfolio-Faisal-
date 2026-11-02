@@ -9,7 +9,8 @@
 <meta property="og:description" content="Brand commercials, company profiles, YouTube content & travel documentaries. 20+ brands, 55+ videos delivered.">
 <meta property="og:image" content="assets/faisal.jpg">
 <meta name="theme-color" content="#0b0b0d">
-<link rel="stylesheet" href="assets/swarm.css">
+<link rel="stylesheet" href="assets/swarm.css?v=7">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
@@ -538,7 +539,7 @@ grid.innerHTML = PROJECTS.map((p,i)=>`
   </article>`).join('');
 
 function loadThumbs(){ grid.querySelectorAll('img[data-id]').forEach(img=>{ img.src=thumb(img.dataset.id) }) }
-fetch('media.json',{cache:'no-store'}).then(r=>r.ok?r.json():{}).catch(()=>({})).then(m=>{ MEDIA=m||{}; loadThumbs() });
+window.portfolioMediaReady = fetch('media.json',{cache:'no-store'}).then(r=>r.ok?r.json():{}).catch(()=>({})).then(m=>{ MEDIA=m||{}; loadThumbs() });
 
 const counts = PROJECTS.reduce((a,p)=>(a[p.cat]=(a[p.cat]||0)+1,a),{});
 $('#filters').innerHTML = `<button class="chip on" data-f="all">All<small>${PROJECTS.length}</small></button>` +
@@ -678,6 +679,6 @@ addEventListener('resize',()=>{layoutScrub();onScroll()});
 addEventListener('load',()=>{layoutScrub();onScroll()});
 layoutScrub(); onScroll();
 </script>
-<script src="assets/swarm.js" defer></script>
+<script src="assets/swarm.js?v=7" defer></script>
 </body>
 </html>
